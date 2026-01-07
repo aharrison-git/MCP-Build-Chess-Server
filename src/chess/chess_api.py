@@ -1,0 +1,22 @@
+import requests
+
+CHESS_API_BASE = "https://api.chess.com/pub"
+
+headers = {
+    "accept": "application/json",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Python/3.10 requests/2.25.1"
+}
+
+def get_player_profile(username):
+    """Fetches the profile of a chess.com player by username."""
+    url = f"{CHESS_API_BASE}/player/{username}"
+    response = requests.get(url)
+    response.raise_for_status()
+    return response.json()
+
+def get_player_stats(username):
+    """Fetches the statistics of a chess.com player by username."""
+    url = f"{CHESS_API_BASE}/player/{username}/stats"
+    response = requests.get(url, headers=headers)
+    response.raise_for_status()
+    return response.json()
